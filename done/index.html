@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="cid:css-b2b9365e-54c5-49d6-bf37-4bf49d2fc944@mhtml.blink" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <title>请假</title>
+    <style>
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      }
+    
+/* nudge left tab downward only */
+.van-tabs__nav--line .van-tab:first-child{ margin-top: 3px; }
+</style>
+<style>
+/* == 顶部标题栏（补齐“请假”一行） == */
+.topbar{position:sticky;top:0;z-index:1000;height:56px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:none;}
+.topbar h1{font-size:20px;line-height:1;font-weight:600;letter-spacing:.5px;color:#222}
+.back-icon{position:absolute;left:14px;width:24px;height: 16px;color:#323233;
+  background:url('back.svg') no-repeat center/contain;}
+/* 让 tabs 不会被顶栏遮挡：因为 topbar 不是 fixed，所以无需额外 padding */
+
+/* nudge left tab downward only */
+.van-tabs__nav--line .van-tab:first-child{ margin-top: 3px; }
+</style>
+
+    <link href="style.css" rel="stylesheet">
+  
+<style>
+/* override: 更小字号 + 更粗字重 */
+.topbar h1{font-size:18px !important;font-weight:700 !important;}
+
+/* nudge left tab downward only */
+.van-tabs__nav--line .van-tab:first-child{ margin-top: 3px; }
+</style>
+
+
+<style>
+/* 去掉顶栏下方的灰色线 */
+.topbar{ border-bottom: none !important; }
+
+/* nudge left tab downward only */
+.van-tabs__nav--line .van-tab:first-child{ margin-top: 3px; }
+</style>
+
+
+
+
+<style>
+/* 让 apply-status 使用 img 覆盖容器 */
+.apply-status{ position: relative; height: 160px; overflow: hidden; border-radius:14px; display:flex; align-items:center; justify-content:center; }
+.apply-status__img{ position:absolute; left:0; top:0; right:0; bottom:0; width:100%; height:100%; object-fit:cover; display:block; }
+.apply-status__text{ position: relative; z-index:1; color:#fff; }
+/* Hide Vant's default moving line */
+.van-tabs__line{ display:none !important; }
+
+/* Space for the new bar */
+.van-tabs__nav--line{ position: relative; }
+
+/* Host the bar on the active tab itself */
+.van-tabs__nav--line .van-tab--active{ position: relative; }
+
+/* Ensure there is room below the text so the bar is visible */
+.van-tabs__nav--line .van-tab--active .van-tab__text{
+  display: inline-block;
+  padding-bottom: 14px;
+}
+
+/* The new centered capsule bar */
+.van-tabs__nav--line .van-tab--active::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  width: 40px;              /* bar width */
+  height: 3px;               /* bar height */
+  background: #F5830D;       /* orange */
+  border-radius: 999px !important;        /* full pill */
+  -webkit-border-radius: 999px !important;
+  clip-path: inset(0 round 999px) !important;   /* force rounded mask */
+  -webkit-clip-path: inset(0 round 999px) !important;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* nudge left tab downward only */
+.van-tabs__nav--line .van-tab:first-child{ margin-top: 16px; }
+</style>
+
+</head>
+  <body class="">
+    <div id="app">
+    <header class="topbar">
+      <i class="back-icon" aria-hidden="true"></i>
+      <h1>请假</h1>
+    </header>
+
+        <div data-v-b67df7d2="" class="apply">
+            <div data-v-b67df7d2="" class="van-tabs van-tabs--line">
+                <div class="van-tabs__wrap">
+                    <div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color: rgb(255, 128, 14);">
+                        <div role="tab" aria-selected="true" class="van-tab van-tab--active" style="color: rgb(255, 128, 14);">
+                            <span class="van-tab__text van-tab__text--ellipsis">请假单</span>
+                        </div>
+                        <div role="tab" class="van-tab">
+                            <span class="van-tab__text van-tab__text--ellipsis">审批流程</span>
+                        </div>
+                        <div class="van-tabs__line" style="background-color: rgb(255, 128, 14); transform: translateX(90px) translateX(-50%); transition-duration: 0.3s;"></div>
+                    </div>
+                </div>
+                <div class="van-tabs__content">
+                    </div>
+            </div>
+            <div data-v-b67df7d2="" class="apply-status">
+                <img src="image.png" alt="" class="apply-status__img">
+                <div class="apply-status__text">休假结束</div>
+            </div>
+            <div data-v-2263468a="" data-v-b67df7d2="" class="header">
+                <div data-v-2263468a="" class="header-avatar">
+                    <div data-v-2263468a="" class="van-image" style="width: 110px; height: 110px; overflow: hidden; border-radius: 4px;">
+                        <img class="van-image__img" id="headerImage" src="avatar.png" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div data-v-2263468a="" class="header-baseInfo">
+                    <div data-v-2263468a="" class="header-baseInfo_item">
+                        <div data-v-2263468a="" class="header-baseInfo_item__tag">姓名：</div>
+                        <div id="youname" data-v-2263468a="" class="header-baseInfo_item__content">姓名</div>
+                    </div>
+                    <div data-v-2263468a="" class="header-baseInfo_item">
+                        <div data-v-2263468a="" class="header-baseInfo_item__tag">学号：</div>
+                        <div id="schoolnumber" data-v-2263468a="" class="header-baseInfo_item__content">202431917</div>
+                    </div>
+                    <div data-v-2263468a="" class="header-baseInfo_item">
+                        <div data-v-2263468a="" class="header-baseInfo_item__tag">班级：</div>
+                        <div data-v-2263468a="" class="header-baseInfo_item__content">计应专2402</div>
+                    </div>
+                    <div data-v-2263468a="" class="header-baseInfo_item">
+                        <div data-v-2263468a="" class="header-baseInfo_item__tag">院系：</div>
+                        <div data-v-2263468a="" class="header-baseInfo_item__content">信息工程学院</div>
+                    </div>
+                </div>
+            </div>
+            <div data-v-b67df7d2="" class="apply-form">
+                <div data-v-b67df7d2="" class="apply-form_type">
+                    <div data-v-b67df7d2="" class="apply-form_title">请假类型</div>
+                    <div data-v-b67df7d2="" role="radiogroup" class="van-radio-group van-radio-group--horizontal">
+                        <div data-v-b67df7d2="" role="radio" tabindex="0" aria-checked="true" class="van-radio van-radio--horizontal">
+                            <div class="van-radio__icon van-radio__icon--square van-radio__icon--checked" style="font-size: 15px;">
+                                <img data-v-b67df7d2="" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAYABgDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAYHCP/EACgQAAAEAwcEAwAAAAAAAAAAAAECAxEABRIEBhUhMUGhBxMUFiNRgv/EABcBAAMBAAAAAAAAAAAAAAAAAAEDBgf/xAAjEQABAwQBBQEBAAAAAAAAAAABAgMEAAURITEGEkFR8KET/9oADAMBAAIRAxEAPwDc+pl+baExWkslXMgmiNC66Ysc59ylHYA0yzfmX9Xvf42K4fbmauuv5Pt6Xq4hcrse/wBixWlvKNXXp3M6X/bR0BGewICuoFOSZLhGDgAePv3e6vZ05NhS3Hjtg5GST5+/NarJ+md+baMxRks6XMumsNCC6guch9imHcB0zzfhEvfXse/23CqW8otFGncyqb9vCDbb+9CSuM6C52EgEeh9qhcbEzMUiQ2Q33AEg+z9uqjqZca2jMVp1JUDLprDWugmDnIfcxQ3Adcs34l/aL3+NhWIW5mooo+T6apquYQhHUURMCSFRlFP9OQDgU/p+WqdGKZCQrs4yMmqjpnca2hMUZ1OkDIJojWggoDHOfYxg2ANc835QhFnaLezCjJS0Odknkmo+7T3pkkqcPGhjgCv/9k=" class="img-icon">
+                            </div>
+                            <span class="van-radio__label">事假</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_position">
+                    <div data-v-b67df7d2="">
+                        <div class="district-cmp">
+                            <div class="district-cmp__title">请假位置</div>
+                            <div class="district-cmp__body">
+                                <div class="van-cell van-field">
+                                    <div class="van-cell__value van-cell__value--alone van-field__value">
+                                        <div class="van-field__body">
+                                            <input type="text" readonly="readonly" value="湖北省-荆州市-荆州区">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div data-v-b67df7d2="" class="position-cmp van-cell van-field">
+                        <div class="van-field__left-icon">
+                            <i class="van-icon van-icon-location">
+                                </i>
+                        </div>
+                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                            <div class="van-field__body">
+                                <textarea rows="1" readonly="readonly" class="van-field__control" style="height: 24px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_thing">
+                    <div data-v-b67df7d2="" class="apply-form_title">具体事项</div>
+                    <div data-v-b67df7d2="" class="van-cell van-field van-field--disabled van-field--min-height">
+                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                            <div class="van-field__body">
+                                <textarea id="specificMatter" rows="2" disabled="disabled" readonly="readonly" placeholder="请输入您的请假具体事项，请详细描述" class="van-field__control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_destination">
+                    <div data-v-b67df7d2="" class="van-cell">
+                        <div data-v-b67df7d2="" class="van-cell__title">
+                            <span data-v-b67df7d2="" class="apply-form_title">目的地</span>
+                        </div>
+                        <div data-v-b67df7d2="" class="van-cell__value">
+                             <span data-v-b67df7d2="" id="destinationProvinceCity">湖北省-荆州市-荆州区</span>
+                        </div>
+                    </div>
+                    <div data-v-b67df7d2="" class="van-cell van-field van-field--disabled van-field--min-height">
+                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                            <div class="van-field__body">
+                                <textarea id="destination" rows="2" disabled="disabled" readonly="readonly" placeholder="请输入详细地址" class="van-field__control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_travalmode">
+                    <div data-v-b67df7d2="" class="apply-form_title">出行方式</div>
+                    <div data-v-b67df7d2="" class="van-cell van-field van-field--disabled van-field--min-height">
+                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                            <div class="van-field__body">
+                                <textarea id="travelMode" rows="2" disabled="disabled" readonly="readonly" placeholder="请输入出行方式以及车次航班号" class="van-field__control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_select">
+                    <div data-v-b67df7d2="" class="apply-form_title">出口</div>
+                    <div data-v-b67df7d2="" class="apply-form_select__container">
+                        <div data-v-b67df7d2="" class="apply-form_select__item">
+                            <div data-v-b67df7d2="">荆州学院</div>
+                        </div>
+                        <div data-v-b67df7d2="" class="apply-form_select__item buildingGate">
+                            <div data-v-b67df7d2="">东大门</div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_select">
+                    <div data-v-b67df7d2="" class="apply-form_title">入口</div>
+                    <div data-v-b67df7d2="" class="apply-form_select__container">
+                        <div data-v-b67df7d2="" class="apply-form_select__item">
+                            <div data-v-b67df7d2="">荆州学院</div>
+                        </div>
+                        <div data-v-b67df7d2="" class="apply-form_select__item buildingGate">
+                            <div data-v-b67df7d2="">东大门</div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="apply-form_select">
+                    <div data-v-b67df7d2="" class="apply-form_title">请假时间</div>
+                    <div data-v-b67df7d2="" class="apply-form-hint">
+                        (请在请假时间内按时返校,超时返校将影响后续请假)
+                    </div>
+                    <div data-v-b67df7d2="" class="apply-form_select__container">
+                        <div id="startTime" data-v-b67df7d2="" class="apply-form_select__item">
+                            <div data-v-b67df7d2="">2025-04-06 18:00</div>
+                        </div>
+                        <div id="endTime" data-v-b67df7d2="" class="apply-form_select__item">
+                            <div data-v-b67df7d2="">2025-04-06 20:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-b67df7d2="" class="area-container"></div>
+                <div data-v-b67df7d2="" class="apply-form_applyperson">
+                    <div data-v-b67df7d2="" class="apply-form_applyperson__title">审批人</div>
+                    <div data-v-b67df7d2="" class="apply-form_select__container">
+                        <div id="approverName" data-v-b67df7d2="">辅导员</div>
+                    </div>
+                </div>
+            </div>
+            <div data-v-b67df7d2="" class="approval-process margin-process">
+                <div data-v-b67df7d2="" class="van-steps van-steps--vertical">
+                    <div class="van-steps__items">
+                        <p data-v-b67df7d2="" class="name title"><span id="approval-section"></span>审批流程</p>
+                        <div data-v-b67df7d2="" class="van-hairline van-step van-step--vertical van-step--finish">
+                            <div class="van-step__title">
+                                <div data-v-b67df7d2="" class="line">
+                                    <p id="youname2" data-v-b67df7d2="" class="name">姓名<span data-v-b67df7d2="" class="small-print role">(申请人)</span></p>
+                                    <p data-v-b67df7d2="" class="approval-result">提交申请</p>
+                                </div>
+                                <div id="filingTime" data-v-b67df7d2="" class="small-print">2025-04-06 17:29:28</div>
+                            </div>
+                            <div class="van-step__circle-container">
+                                <i class="van-icon van-step__icon van-step__icon--finish">
+                                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAYABgDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAYHCP/EACgQAAAEAwcEAwAAAAAAAAAAAAECAxEABRIEBhUhMUGhBxMUFiNRgv/EABcBAAMBAAAAAAAAAAAAAAAAAAEDBgf/xAAjEQABAwQBBQEBAAAAAAAAAAABAgMEAAURITEGEkFR8KET/9oADAMBAAIRAxEAPwDc+pl+baExWkslXMgmiNC66Ysc59ylHYA0yzfmX9Xvf42K4fbmauuv5Pt6Xq4hcrse/wBixWlvKNXXp3M6X/bR0BGewICuoFOSZLhGDgAePv3e6vZ05NhS3Hjtg5GST5+/NarJ+md+baMxRks6XMumsNCC6guch9imHcB0zzfhEvfXse/23CqW8otFGncyqb9vCDbb+9CSuM6C52EgEeh9qhcbEzMUiQ2Q33AEg+z9uqjqZca2jMVp1JUDLprDWugmDnIfcxQ3Adcs34l/aL3+NhWIW5mooo+T6apquYQhHUURMCSFRlFP9OQDgU/p+WqdGKZCQrs4yMmqjpnca2hMUZ1OkDIJojWggoDHOfYxg2ANc835QhFnaLezCjJS0Odknkmo+7T3pkkqcPGhjgCv/9k=" class="van-icon__image">
+                                        </i>
+                            </div>
+                            <div class="van-step__line"></div>
+                        </div>
+                        <div data-v-b67df7d2="" class="van-hairline van-step van-step--vertical van-step--finish">
+                            <div class="van-step__title">
+                                <div data-v-b67df7d2="" class="line">
+                                    <p id="approverName2" data-v-b67df7d2="" class="name">辅导员<span data-v-b67df7d2="" class="small-print role">(一级审批)</span></p>
+                                    <p data-v-b67df7d2="" class="approval-result agreeAndTerminate">同意并终止</p>
+                                </div>
+                                <div data-v-b67df7d2="">
+                                    <div data-v-b67df7d2="" class="van-cell van-field">
+                                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                                            <div class="van-field__body">
+                                                <textarea readonly="readonly" class="van-field__control" style="height: 48px;">无                                                    
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="grantTime" data-v-b67df7d2="" class="small-print">2025-04-06 17:58:26</div>
+                            </div>
+                            <div class="van-step__circle-container">
+                                <i class="van-icon van-step__icon van-step__icon--finish">
+                                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAYABgDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAYHCP/EACgQAAAEAwcEAwAAAAAAAAAAAAECAxEABRIEBhUhMUGhBxMUFiNRgv/EABcBAAMBAAAAAAAAAAAAAAAAAAEDBgf/xAAjEQABAwQBBQEBAAAAAAAAAAABAgMEAAURITEGEkFR8KET/9oADAMBAAIRAxEAPwDc+pl+baExWkslXMgmiNC66Ysc59ylHYA0yzfmX9Xvf42K4fbmauuv5Pt6Xq4hcrse/wBixWlvKNXXp3M6X/bR0BGewICuoFOSZLhGDgAePv3e6vZ05NhS3Hjtg5GST5+/NarJ+md+baMxRks6XMumsNCC6guch9imHcB0zzfhEvfXse/23CqW8otFGncyqb9vCDbb+9CSuM6C52EgEeh9qhcbEzMUiQ2Q33AEg+z9uqjqZca2jMVp1JUDLprDWugmDnIfcxQ3Adcs34l/aL3+NhWIW5mooo+T6apquYQhHUURMCSFRlFP9OQDgU/p+WqdGKZCQrs4yMmqjpnca2hMUZ1OkDIJojWggoDHOfYxg2ANc835QhFnaLezCjJS0Odknkmo+7T3pkkqcPGhjgCv/9k=" class="van-icon__image">
+                                        </i>
+                            </div>
+                            <div class="van-step__line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+    <div class="van-toast van-toast--middle van-toast--loading" style="z-index: 2001; display: none;">
+        <div class="van-loading van-loading--circular van-toast__loading">
+            <span class="van-loading__spinner van-loading__spinner--circular">
+                <svg viewBox="25 25 50 50" class="van-loading__circular">
+                  <circle cx="50" cy="50" r="20" fill="none"></circle>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <script>
+      // 页面加载时从 localStorage 中读取数据
+      function populatePageData() {
+          // 获取 localStorage 中的数据
+          const specificMatter = localStorage.getItem('specificMatter') || '无具体事项';
+          const destination = localStorage.getItem('destination') || '无目的地';
+          // ** 变更点 #2: ** 读取省市区数据
+          const destinationProvinceCity = localStorage.getItem('destinationProvinceCity') || '湖北省-荆州市-荆州区';
+          const travelMode = localStorage.getItem('travelMode') || '无出行方式';
+          const startTime = localStorage.getItem('startTime') || '无开始时间';
+          const endTime = localStorage.getItem('endTime') || '无结束时间';
+          const name = localStorage.getItem('youname') || '姓名';
+          const number = localStorage.getItem('schoolnumber') || '202000000';
+          const className = localStorage.getItem('className') || '计科20XX班';
+          const grantTime = localStorage.getItem('grantTime') || '无批准时间';
+          const filingTime = localStorage.getItem('filingTime') || '无申请时间';
+          const approverName = localStorage.getItem('approverName') || '辅导员';
+          const imageData = localStorage.getItem('imageData');
+
+          // 将数据填充到对应的输入框中
+          document.getElementById('specificMatter').textContent = specificMatter;
+          document.getElementById('destination').textContent = destination;
+          // ** 变更点 #3: ** 填充省市区
+          document.getElementById('destinationProvinceCity').textContent = destinationProvinceCity;
+          document.getElementById('travelMode').textContent = travelMode;
+          document.getElementById('startTime').textContent = startTime;
+          document.getElementById('endTime').textContent = endTime;
+          document.getElementById('youname').textContent = name;
+          // 更新审批流程中的申请人名称
+          const youname2Element = document.getElementById('youname2');
+          if (youname2Element) {
+              const roleSpan = youname2Element.querySelector('.small-print.role');
+              youname2Element.textContent = name;
+              if (roleSpan) {
+                  youname2Element.appendChild(roleSpan);
+              }
+          }
+          document.getElementById('schoolnumber').textContent = number;
+          // ** 变更点 #7: ** 填充班级信息
+          const allInfoItems = document.querySelectorAll('.header-baseInfo_item');
+          allInfoItems.forEach(item => {
+              const tagElement = item.querySelector('.header-baseInfo_item__tag');
+              if (tagElement && tagElement.textContent.trim() === '班级：') {
+                  const contentElement = item.querySelector('.header-baseInfo_item__content');
+                  if (contentElement) {
+                      contentElement.textContent = className;
+                  }
+              }
+          });
+          document.getElementById('filingTime').textContent = filingTime;
+          document.getElementById('grantTime').textContent = grantTime;
+          
+          // 填充审批人名字
+          document.getElementById('approverName').textContent = approverName;
+          const approverName2Element = document.getElementById('approverName2');
+          if (approverName2Element) {
+              const roleSpan = approverName2Element.querySelector('.small-print.role');
+              approverName2Element.textContent = approverName;
+              if (roleSpan) {
+                  approverName2Element.appendChild(roleSpan);
+              }
+          }
+          
+          if (imageData) {
+                document.getElementById('headerImage').src = imageData;
+            }
+
+
+      };
+    </script>
+  
+<script>
+(function(){
+  var anchor = document.getElementById('approval-section');
+  if(!anchor) return;
+
+  // 找到“上方 Tab 里的 审批流程”元素
+  var all = Array.from(document.querySelectorAll('*'));
+  var candidates = all.filter(function(el){
+    try{
+      return el.childElementCount===0 && (el.textContent||'').trim()==='审批流程';
+    }catch(e){return false;}
+  });
+
+  var tabEl = null;
+  for (var i=0;i<candidates.length;i++){
+    var el = candidates[i];
+    var inTop = el.closest && (el.closest('.van-tabs') || el.closest('.tabs') || el.closest('[role="tablist"]'));
+    if (inTop){ tabEl = el; break; }
+  }
+  if (!tabEl && candidates.length) tabEl = candidates[0];
+
+  if (tabEl){
+    var clickable = (tabEl.closest && tabEl.closest('a,button,div,span,li')) || tabEl;
+    try{ clickable.style.cursor = 'pointer'; }catch(e){}
+    clickable.addEventListener('click', function(e){
+      try{
+        document.getElementById('approval-section').scrollIntoView();
+      }catch(err){
+        location.hash = '#approval-section';
+      }
+    }, {passive:true});
+  }
+})();
+</script>
+
+<button id="edit-button">编辑</button>
+
+<div id="edit-modal">
+  <div id="edit-form-container">
+    <h3>编辑页面信息</h3>
+    
+    <div class="form-group">
+      <label for="editName">姓名:</label>
+      <input type="text" id="editName">
+    </div>
+    
+    <div class="form-group">
+      <label for="editNumber">学号:</label>
+      <input type="text" id="editNumber">
+    </div>
+
+    <div class="form-group">
+      <label for="editClass">班级:</label>
+      <input type="text" id="editClass">
+    </div>
+
+    <div class="form-group">
+      <label for="editApprover">审批人:</label>
+      <input type="text" id="editApprover">
+    </div>
+
+    <div class="form-group">
+      <label for="editSpecificMatter">具体事项:</label>
+      <textarea id="editSpecificMatter" rows="2"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="editDestination">目的地 (详细地址):</label>
+      <textarea id="editDestination" rows="2"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="editDestinationProvinceCity">目的地 (省市区):</label>
+      <input type="text" id="editDestinationProvinceCity" placeholder="例如: 湖北省-荆州市-荆州区">
+    </div>
+    
+    <div class="form-group">
+      <label for="editTravelMode">出行方式:</label>
+      <textarea id="editTravelMode" rows="2"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="editStartTime">请假开始时间:</label>
+      <input type="text" id="editStartTime" placeholder="例如: 2025-04-06 18:00">
+    </div>
+    
+    <div class="form-group">
+      <label for="editEndTime">请假结束时间:</label>
+      <input type="text" id="editEndTime" placeholder="例如: 2025-04-06 20:00">
+    </div>
+    
+    <div class="form-group">
+      <label for="editFilingTime">申请时间:</label>
+      <input type="text" id="editFilingTime" placeholder="例如: 2025-04-06 17:29:28">
+    </div>
+    
+    <div class="form-group">
+      <label for="editGrantTime">批准时间:</label>
+      <input type="text" id="editGrantTime" placeholder="例如: 2025-04-06 17:58:26">
+    </div>
+    
+    <div class="form-group">
+      <label for="editImage">头像图片:</label>
+      <input type="file" id="editImage" accept="image/*">
+      <small>选择新图片来替换头像。不选则保留原样。</small>
+    </div>
+    
+    <div class="form-buttons">
+      <button id="saveButton">保存</button>
+      <button id="cancelButton">取消</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  #edit-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9998;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: none; /* 默认隐藏 */
+  }
+  
+  #edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none; /* 默认隐藏 */
+    overflow-y: auto;
+    padding: 20px 0;
+  }
+  
+  #edit-form-container {
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  #edit-form-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group textarea,
+  .form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* 关键 */
+    font-size: 14px;
+  }
+
+  .form-group textarea {
+    min-height: 60px;
+  }
+
+  .form-group small {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+  }
+  
+  .form-buttons {
+    text-align: right;
+    margin-top: 25px;
+  }
+  
+  .form-buttons button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  #saveButton {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  #cancelButton {
+    background-color: #dc3545;
+    color: white;
+  }
+</style>
+
+<script>
+  // 页面加载时,做两件事:
+  // 1. 运行旧的 populatePageData() 来填充主页面
+  // 2. 运行新的 populateEditForm() 来填充弹出的编辑表单
+  window.onload = function() {
+      if (typeof populatePageData === 'function') {
+          populatePageData();
+      }
+      populateEditForm();
+  };
+
+  // 1. 用 localStorage 的数据填充编辑表单
+  function populateEditForm() {
+      // 读取数据,使用和旧脚本一致的默认值
+      document.getElementById('editName').value = localStorage.getItem('youname') || '姓名';
+      document.getElementById('editNumber').value = localStorage.getItem('schoolnumber') || '202000000';
+      // ** 变更点 #8: ** 填充班级
+      document.getElementById('editClass').value = localStorage.getItem('className') || '计科20XX班';
+      document.getElementById('editApprover').value = localStorage.getItem('approverName') || '辅导员';
+      document.getElementById('editSpecificMatter').value = localStorage.getItem('specificMatter') || '无具体事项';
+      document.getElementById('editDestination').value = localStorage.getItem('destination') || '无目的地';
+      // ** 变更点 #5: ** 填充省市区
+      document.getElementById('editDestinationProvinceCity').value = localStorage.getItem('destinationProvinceCity') || '湖北省-荆州市-荆州区';
+      document.getElementById('editTravelMode').value = localStorage.getItem('travelMode') || '无出行方式';
+      document.getElementById('editStartTime').value = localStorage.getItem('startTime') || '无开始时间';
+      document.getElementById('editEndTime').value = localStorage.getItem('endTime') || '无结束时间';
+      document.getElementById('editFilingTime').value = localStorage.getItem('filingTime') || '无申请时间';
+      document.getElementById('editGrantTime').value = localStorage.getItem('grantTime') || '无批准时间';
+  }
+
+  // 2. 获取所有需要操作的元素
+  const editButton = document.getElementById('edit-button');
+  const modal = document.getElementById('edit-modal');
+  const cancelButton = document.getElementById('cancelButton');
+  const saveButton = document.getElementById('saveButton');
+  const topBar = document.querySelector('.topbar'); 
+
+  // 3. 绑定事件
+  
+  // 双击顶部 "请假" 栏,显示"编辑"按钮
+  if (topBar) {
+      topBar.addEventListener('dblclick', function() {
+          editButton.style.display = 'block';
+      });
+  }
+
+  // 点击“编辑”按钮,显示模态框
+  editButton.addEventListener('click', function() {
+      modal.style.display = 'block';
+  });
+
+  // 点击“取消”按钮,隐藏模态框
+  cancelButton.addEventListener('click', function() {
+      modal.style.display = 'none';
+      // 重置文件输入,防止下次误提交
+      document.getElementById('editImage').value = null; 
+  });
+
+  // 点击"保存"按钮,保存数据
+  saveButton.addEventListener('click', function() {
+      // 保存所有文本字段
+      localStorage.setItem('youname', document.getElementById('editName').value);
+      localStorage.setItem('schoolnumber', document.getElementById('editNumber').value);
+      // ** 变更点 #9: ** 保存班级
+      localStorage.setItem('className', document.getElementById('editClass').value);
+      localStorage.setItem('approverName', document.getElementById('editApprover').value);
+      localStorage.setItem('specificMatter', document.getElementById('editSpecificMatter').value);
+      localStorage.setItem('destination', document.getElementById('editDestination').value);
+      // ** 变更点 #6: ** 保存省市区
+      localStorage.setItem('destinationProvinceCity', document.getElementById('editDestinationProvinceCity').value);
+      localStorage.setItem('travelMode', document.getElementById('editTravelMode').value);
+      localStorage.setItem('startTime', document.getElementById('editStartTime').value);
+      localStorage.setItem('endTime', document.getElementById('editEndTime').value);
+      localStorage.setItem('filingTime', document.getElementById('editFilingTime').value);
+      localStorage.setItem('grantTime', document.getElementById('editGrantTime').value);
+
+      const imageFile = document.getElementById('editImage').files[0];
+
+      if (imageFile) {
+          // 如果用户选择了新图片
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              // 将图片转换为 Base64 字符串并保存
+              localStorage.setItem('imageData', e.target.result);
+              // 保存成功后,隐藏模态框并刷新页面
+              alert('保存成功！');
+              modal.style.display = 'none';
+              location.reload();
+          };
+          reader.onerror = function() {
+              alert('图片读取失败！');
+          };
+          reader.readAsDataURL(imageFile);
+      } else {
+          // 如果用户没有选择新图片,则直接保存文本内容
+          alert('保存成功！');
+          modal.style.display = 'none';
+          location.reload();
+      }
+  });
+</script>
+
+
+</body>
+</html>
